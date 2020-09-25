@@ -11,8 +11,10 @@ scripts:
 
 This does not seem particularly negotiable. Therefore, **the path to cost recovery for 18F involves earning back this $12M each budget year**.
 
+We drop the months of December and January from this set of estimations, because so much of government (essentially) "shuts down" during this time. 
+
+Put another way, **we assume a 10-month financial year** when we calculate things like "how much work can we do?," but we assume a 12-month year when we consider things like "how much do staff cost?"
+
+[How do we earn back $12M in 10 months?](020-bizdev)
+
 <canvas id="fixed-overhead"></canvas>
-
-We drop the months of December and January from this set of estimations, because so much of government (essentially) "shuts down" during this time.
-
-[How do we earn back $12M?](020-bizdev)

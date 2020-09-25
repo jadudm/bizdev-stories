@@ -25,8 +25,9 @@ class Data {
     }
 }
 
-Data.monthNames = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', ];
+// Data.monthNames = ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', ];
+Data.monthNames = [ 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10'];
 
 Data.fixedOverhead = 12;
-Data.fixedOverhead10mo = Array(10).fill(Data.fixedOverhead);
+Data.fixedOverhead10mo = Array(Data.monthNames.length).fill(Data.fixedOverhead);
 data = new Data();

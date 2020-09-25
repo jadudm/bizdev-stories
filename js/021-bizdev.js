@@ -1,5 +1,5 @@
 var defaultValue = 2;
-var theFloor = 0;
+var theFloor = 12;
 
 fixedOverhead = new Dataset({
     label: "Fixed Overhead",
@@ -17,6 +17,7 @@ bizdevOverhead = new Dataset({
 params = {
     datasets: [ fixedOverhead, bizdevOverhead ],
 }
+
 sc = new SuperChart("bizdev", params);
 
 bds = new SuperVSlider("slider-bizdevs", 
