@@ -83,14 +83,49 @@ function valueOfWork(amount) {
     return valueOverYear(value);
 }
 
-function valueOfWorkx(kinds) {
+function numWorkers(kinds) {
     // Kinds should be an object.
     // e.g. { pa: 3, ei: 7 }
-    lowvalue = 0;
-    highvalue = 0;
-    Object.keys(kinds).forEach(function(key) {
-        workers = services[key].workers
-        duration = services[key].duration
-        value = services[key].value 
-    });
+    // Those are per-month values. So.
+
+    // Every month, start the requisite number of projects.
+    // Push objects that describe how many people, the start start month, and
+    // the end month.
+    low = [];
+    high = [];
+    for (ndx = 0 ; ndx < Data.monthNames.length; ndx++) {
+        // I will start the number of projects described.
+        // That means I need that many workers each month.
+        Object.keys(kinds).forEach(function(key) {
+            workers = services[key].workers;
+            duration = services[key].duration;
+            low.push({need: workers.low * kinds[key], start: ndx, end: (ndx + Math.floor(duration.low / 4.0) - 1)});
+            high.push({need: workers.high * kinds[key], start: ndx, end: (ndx + Math.ceil(duration.high / 4.0) - 1)});
+        });
+    }
+    // Now, I'm going to arrange this into two data serieses.
+    // One is a low estimate. The other is a high estimate. 
+    // Each month, see if it shows up in the duration range (start-end)
+    // If it does, add in the number of workers needed.
+    resultlow = [];
+    resulthigh = [];
+    for (ndx = 0 ; ndx < Data.monthNames.length; ndx++) {
+        lowcount = 0;
+        highcount = 0;
+        // In this month, count how many projects are alive. 
+        // Sum up the number of workers needed for those projects.
+        for (obj of low) {
+            if ((ndx >= obj.start) && (ndx <= obj.end)) {
+                lowcount += obj.need;
+            }
+        }
+        for (obj of high) {
+            if ((ndx >= obj.start) && (ndx <= obj.end)) {
+                highcount += obj.need;
+            }
+        }
+        resultlow.push(lowcount);
+        resulthigh.push(highcount);
+    }
+    return {low: resultlow, high: resulthigh};
 }

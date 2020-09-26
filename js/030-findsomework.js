@@ -32,14 +32,16 @@ function workSliderCallback (val) {
     totalIncome = income.data[income.data.length - 1].toFixed(2);
     sc.chart.update();
     // Update the story text.
-    str = ((totalIncome > 12) ? "🌟 " : "")
-        + "" + bds.value() + " BD" 
-        + (((bds.value() == 0) || (bds.value() > 1)) ? "s" : "")
-        + " generate" 
-        + (((bds.value() == 0) || (bds.value() > 1)) ? "" : "s")
-        + " $" +  totalIncome + "M in revenue."
-        + ((totalIncome > 12) ? " 🌟" : "");
-    document.getElementById("outcome").innerHTML = str;
+    if (document.getElementById("outcome")) {
+        let str = ((totalIncome > 12) ? "🌟 " : "")
+            + "" + bds.value() + " BD" 
+            + (((bds.value() == 0) || (bds.value() > 1)) ? "s" : "")
+            + " generate" 
+            + (((bds.value() == 0) || (bds.value() > 1)) ? "" : "s")
+            + " $" +  totalIncome + "M in revenue."
+            + ((totalIncome > 12) ? " 🌟" : "");
+        document.getElementById("outcome").innerHTML = str;
+    }
 }
 
 bds = new SuperHSlider("slider-bizdevs", 
@@ -85,9 +87,9 @@ bundles = new SuperHSlider("slider-bundles",
     {   
         width: 120,
         height: 250,
-        ticks: 10,
+        ticks: 3,
         min: 0,
-        max: 8,
+        max: 3,
         step: 1,
         default: 0,
         callback: workSliderCallback

@@ -3,24 +3,21 @@ layout: page
 scripts:
     - "js/charting.js"
     - "js/030-findsomework.js"
+    - "js/040-howmany.js"
+    - "js/050-payme.js"
+    - "js/060-wranglers.js"
 ---
 
-# Lets Find Some Work
+# Herding Cats
 
-For this story, our business development team has monthly and annual targets for business development[^actual]. 
+We work in a complex space. Some people wrangling is warranted.
 
-This gives us a few knobs:
-
-1. How many business development staff do we have?
-2. What expectations (sales targets) do we have for those staff every month?
-3. Given the resulting sales mix, what kind of revenue are we likely to see come end of year?
-
-*Note: Bundles appear to pay well, but are not common.*
+This model assumes 5 fixed management roles (Directors of Design, Eng, etc.) and one additional full-time wrangler per 20 WBs. Wranglers are assumed in this model to be pure overhead[^inpractice].
 
 <div class="grid-container">
     <div class="grid-row">
         <div class="grid-col-12">
-            <p id="outcome" style="text-align: center">1 BD and no work generates no revenue.</p>
+            <p id="message" style="text-align: center"><br>&nbsp;</p>
         </div>
     </div>
     <div class="grid-row">
@@ -42,18 +39,17 @@ This gives us a few knobs:
         </div>
     </div>
     <div class="grid-row">
-        <div class="grid-col-1"></div>
-        <div class="grid-col-9">
+        <div class="grid-col-6">
             <canvas id="thechart"></canvas>
+        </div>        
+        <div class="grid-col-6">
+            <canvas id="workerchart"></canvas>
         </div>
-        <div class="grid-col-1"></div>
     </div>
 </div>
 
-Can you make 18F clear its overheads?
-
-Once you have, [lets do this work](040-howmany)!
+**Management does not add a significant overhead** to the 18F story.
 
 <hr>
 
-[^actual]: In reality, it is the work of a small number of brave 18F team members who generate business for the organization. Leadership for business development is a detail (4 months). While many consultancies would have a dedicated, specialized business development team, that is not the case for 18F.
+[^inpractice]: If, in practice, we wish to have management roles include some billable time, we can. However, we see that management roles do not "swamp" our staffing numbers. With 2xBDs pulling 4xPAs and 1xEI per month, we need roughly 130 staff members to "do the work," but only 9 managers. **The cost of having dedicated business development and management does not dominate our costing model.**

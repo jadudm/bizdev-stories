@@ -48,12 +48,18 @@ class SuperChart {
             }});
     }    
 
+    datasets(d) {
+        console.log();
+        this.chart.data.datasets = d;
+    }
+
     addDataset (d) {
         this.chart.data.datasets.push(d);
     }
 
     callback (dsndx, fun) {
         this.chart.data.datasets[dsndx].function = fun;
+
     } 
 }
 
@@ -82,6 +88,8 @@ class SuperHSlider {
             .step(params.step || 1)
             .default(existsAndNumber(params.default, 0))
             .on('onchange', params.callback || function (val) { })
+            .on('end', params.callback || function (val) { })
+
         this.step = d3
         .select('div#' + div)
         .append('svg')
@@ -94,6 +102,11 @@ class SuperHSlider {
 
     value () {
         return this.slider.value();
+    }
+
+    callback(fun) {
+        this.slider.on('onchange', fun);
+        this.slider.on('end', fun);
     }
 }
 

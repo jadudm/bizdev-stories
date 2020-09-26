@@ -3,24 +3,24 @@ layout: page
 scripts:
     - "js/charting.js"
     - "js/030-findsomework.js"
+    - "js/040-howmany.js"
+    - "js/050-payme.js"
 ---
 
-# Lets Find Some Work
+# I Want My Two Dollars![^twodollars]
 
-For this story, our business development team has monthly and annual targets for business development[^actual]. 
+In order for revenue to be generated, we need to pay the WBs.
 
-This gives us a few knobs:
+In this model, the overhead is calculated as the sum of:
 
-1. How many business development staff do we have?
-2. What expectations (sales targets) do we have for those staff every month?
-3. Given the resulting sales mix, what kind of revenue are we likely to see come end of year?
-
-*Note: Bundles appear to pay well, but are not common.*
+* The $12M fixed overhead.
+* The cost of business development.
+* The salaries (GS15s1), region adjustment (20%) and overheads (65%) for staff.
 
 <div class="grid-container">
     <div class="grid-row">
         <div class="grid-col-12">
-            <p id="outcome" style="text-align: center">1 BD and no work generates no revenue.</p>
+            <p id="message" style="text-align: center"></p>
         </div>
     </div>
     <div class="grid-row">
@@ -42,18 +42,21 @@ This gives us a few knobs:
         </div>
     </div>
     <div class="grid-row">
-        <div class="grid-col-1"></div>
-        <div class="grid-col-9">
+        <div class="grid-col-6">
             <canvas id="thechart"></canvas>
+        </div>        
+        <div class="grid-col-6">
+            <canvas id="workerchart"></canvas>
         </div>
-        <div class="grid-col-1"></div>
     </div>
 </div>
 
-Can you make 18F clear its overheads?
+To reiterate, **optimal conditions are not the real world**. Staffing requirements almost certainly must be closer to the max rather than the minimum in order to clear overheads.
 
-Once you have, [lets do this work](040-howmany)!
+In the next two slides, we'll explore the cost of adding dedicated **management**, and then consider the impact of **leaves**.
+
+First, [management](060-wranglers).
 
 <hr>
 
-[^actual]: In reality, it is the work of a small number of brave 18F team members who generate business for the organization. Leadership for business development is a detail (4 months). While many consultancies would have a dedicated, specialized business development team, that is not the case for 18F.
+[^twodollars]: *[Better Off Dead](https://youtu.be/6z9Cg46Nktw?t=173)*.
