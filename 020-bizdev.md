@@ -25,7 +25,7 @@ For the story being told here, we are going to ask the question "what if we had 
     </div>
 </div>
 
-But, we can [look at this in more than one way](021-bizdev).
+But, we can [look at this in more than one way](021-bizdev.html).
 
 <hr>
 

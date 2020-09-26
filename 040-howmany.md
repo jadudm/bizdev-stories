@@ -50,7 +50,7 @@ When we land a path analysis, it requires <span id="papeople"></span> WBs betwee
     </div>
 </div>
 
-Perhaps we should see what happens when we [pay the staff](050-payme).
+Perhaps we should see what happens when we [pay the staff](050-payme.html).
 
 <hr>
 

@@ -52,7 +52,7 @@ This gives us a few knobs:
 
 Can you make 18F clear its overheads?
 
-Once you have, [lets do this work](040-howmany)!
+Once you have, [lets do this work](040-howmany.html)!
 
 <hr>
 

@@ -25,4 +25,4 @@ Compared to the $12M fixed overhead, the cost of a few business development staf
 
 OK. So, we have some business developers. 
 
-Lets pretend they [bring in some work](030-findsomework).
+Lets pretend they [bring in some work](030-findsomework.html).

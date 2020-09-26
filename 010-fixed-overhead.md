@@ -15,6 +15,6 @@ We drop the months of December and January from this set of estimations, because
 
 Put another way, **we assume a 10-month financial year** when we calculate things like "how much work can we do?," but we assume a 12-month year when we consider things like "how much do staff cost?"
 
-[How do we earn back $12M in 10 months?](020-bizdev)
+[How do we earn back $12M in 10 months?](020-bizdev.html)
 
 <canvas id="fixed-overhead"></canvas>

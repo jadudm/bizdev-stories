@@ -55,7 +55,7 @@ To reiterate, **optimal conditions are not the real world**. Staffing requiremen
 
 In the next two slides, we'll explore the cost of adding dedicated **management**, and then consider the impact of **leaves**.
 
-First, [management](060-wranglers).
+First, [management](060-wranglers.html).
 
 <hr>
 
