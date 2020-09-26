@@ -1,11 +1,22 @@
 class Dataset {
+    order = 0;
     constructor (params = {}) {
         this.label = params.label || "Data";
         this.function = params.function || function (x) { return x; };
         this.backgroundColor = params.backgroundcolor || 'rgb(0, 0, 0, 0.1)';
         this.borderColor = params.bordercolor ||  'rgb(255, 99, 132)';
         this.data = params.data || [];
-        this.steppedLine = params.steppedline || false;
+        //this.type = params.type || 'line';
+        if (params.type == "line") {
+            this.steppedLine = params.steppedline || false;
+        }
+        // if (Dataset.order != null) {
+        //     Dataset.order += 1;
+        //     this.order = Dataset.order;
+        // } else {
+        //     Dataset.order = 1;
+        //     this.order = 1
+        // }
     }
 }
 
@@ -19,25 +30,6 @@ class SuperChart {
             data: {
                 labels: this.labels || Data.monthNames,
                 datasets: params.datasets || [ new Dataset() ],
-                 
-                    // {
-                    // label: params.label || "Default Label",
-                    // function: function (x) { 
-                    //     return x;
-                    // }, 
-                    // backgroundColor: params.backgroundColor || 'rgb(0, 0, 0, 0.1)',
-                    // borderColor: params.borderColor || 'rgb(255, 99, 132)',
-                    // data: params.data || [],
-                    // steppedLine: false,
-                    // },
-                    // {
-                    //     label: 'BizDev Cost',
-                    //     function: params.callback || function (x) { return x; }, 
-                    //     backgroundColor: 'rgb(0, 0, 0, 0.1)',
-                    //     borderColor: 'rgb(66, 00, 66)',
-                    //     data: [], // Array(10).fill(12)
-                    //     steppedLine: false,
-                    // },
             }, // Configuration options go here
             options: params.options || 
                 {
@@ -45,7 +37,7 @@ class SuperChart {
                     yAxes: [{
                         ticks: {
                             suggestedMin: params.ymin || 0,
-                            suggestedMax: params.ymax || 24
+                            suggestedMax: params.ymax || 15
                         },
                         scaleLabel: {
                             display: params.ylabel ? true : false,
@@ -65,49 +57,70 @@ class SuperChart {
     } 
 }
 
-
+// Dancing around the fact that '0' is considered
+// a logical 'false' in Javascript.
+function existsAndNumber(v, retval = null) {
+    if(!(typeof v === 'undefined' || v === null)) {
+        if (Number.isInteger(v)) {
+            return v;
+        } else {
+            return retval;
+        }
+    } else {
+        return retval;
+    }
+}
 class SuperHSlider {
     constructor (div, params = {}) {
-        this.sliderStep = d3
+        this.slider = d3
             .sliderBottom()
-            .min(params.min || 1)
-            .max(params.max || 10)
+            .min(existsAndNumber(params.min, 1))
+            .max(existsAndNumber(params.max, 10))
             .width(params.width || 300)
             .tickFormat(d3.format(params.format || 'd'))
             .ticks(params.ticks || 10)
             .step(params.step || 1)
-            .default(params.default || 2)
+            .default(existsAndNumber(params.default, 0))
             .on('onchange', params.callback || function (val) { })
-        this.gStep = d3
+        this.step = d3
         .select('div#' + div)
         .append('svg')
         .attr('width', 500)
         .attr('height', 100)
         .append('g')
         .attr('transform', 'translate(30,30)');
-        this.gStep.call(this.sliderStep);
+        this.step.call(this.slider);
+    }
+
+    value () {
+        return this.slider.value();
     }
 }
 
 class SuperVSlider {
     constructor (div, params = {}) {
-        this.sliderStep = d3
+        this.slider = d3
             .sliderLeft()
-            .min(params.min || 0)
-            .max(params.max || 10)
+            .min(existsAndNumber(params.min, 1))
+            .max(existsAndNumber(params.max, 10))
             .height(params.height || 250)
             .tickFormat(d3.format(params.format || 'd'))
             .ticks(params.ticks || 10)
             .step(params.step || 1)
-            .default(params.default || 2)
+            .default(existsAndNumber(params.default, 0))
             .on('onchange', params.callback || function (val) { });
-        this.gStep = d3
+        this.step = d3
         .select('div#' + div)
         .append('svg')
         .attr('width', params.stepwidth || 100)
         .attr('height', params.stepheight || 400)
         .append('g')
         .attr('transform', 'translate(60,30)');
-        this.gStep.call(this.sliderStep);
+        this.step.call(this.slider);
     }
+
+    value () {
+        return this.slider.value();
+    }
+
 }
