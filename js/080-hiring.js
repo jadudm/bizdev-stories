@@ -21,13 +21,13 @@ wsc.addDataset(hiringwbs);
 function calcHiringTT(v) {
     wb = v * bds.value();
     // 30% roll.
-    replace = Math.ceil(wb * 0.3);
+    replace = Math.ceil(wb * Data.churn);
     // This is how many hires we need to make this month.
     // How, multiply that by 110h.
-    replacetime = replace * 110;
+    replacetime = replace * Data.OHPerHire;
     // This needs to be backfilled by a WB.
     // 10 months, 4w/month = 40w. 40 * 40 = 1600h.
-    return Math.ceil(replacetime / 1600);
+    return Math.ceil(replacetime / Data.HoursPerWorkYear);
 }
 
 function callback080(val, render = true) {
@@ -35,7 +35,6 @@ function callback080(val, render = true) {
 
     // Add in the cost of WBs.
     nw = numWorkers(getSliderValues());
-
     minwbs.data = nw.low.map(v => v * bds.value());
     maxwbs.data = nw.high.map(v => v * bds.value());
     leavewbs.data = nw.high.map(calcLeaveWBs)
@@ -51,11 +50,17 @@ function callback080(val, render = true) {
     // Add leave WBs into the calculations.
     minleavewbs = Math.min(...leavewbs.data);
     maxleavewbs = Math.max(...leavewbs.data);
+    // And hiringwbs as well
     minhiringwbs = Math.min(...hiringwbs.data);
     maxhiringwbs = Math.max(...hiringwbs.data);
 
-    minoh = costOfBizdevs(theFloor)(bds.value() + minw + minwrang + maxleavewbs + minhiringwbs);
-    maxoh = costOfBizdevs(theFloor)(bds.value() + maxw + maxwrang + maxleavewbs + maxhiringwbs);
+    // TTs are pure overhead
+    minttrequired = Math.ceil((minw * Data.churn) / Data.wbsPerTT);
+    maxttrequired = Math.ceil((maxw * Data.churn) / Data.wbsPerTT);
+
+
+    minoh = costOfBizdevs(theFloor)(bds.value() + minw + minwrang + maxleavewbs + minhiringwbs + minttrequired);
+    maxoh = costOfBizdevs(theFloor)(bds.value() + maxw + maxwrang + maxleavewbs + maxhiringwbs + maxttrequired);
     ohlow.data = minoh;
     ohhigh.data = maxoh;
 
@@ -66,14 +71,24 @@ function callback080(val, render = true) {
     if (render) {
         sc.chart.update();
         wsc.chart.update();   
-
+        console.log("080")
         if (document.getElementById("message")) {
             var str = defaultMessage;
+            ttstr = "";
+            if (minttrequired == maxttrequired) {
+                ttstr = "" + minttrequired + "TT" + plural(minttrequired);
+            } else {
+                ttstr = "" + minttrequired + " to " + maxttrequired + " TTs";
+            }
             if (minhiringwbs != 0) {
                 if (minhiringwbs == maxhiringwbs) {
-                    str = minhiringwbs + " WB" + plural(minhiringwbs) + " needed to cover hiring";
+                    str = minhiringwbs + " WB" + plural(minhiringwbs) +" and " 
+                        + ttstr + " needed to cover hiring"
+                        + minw + " to " + maxw + " WBs.";
                 } else {
-                    str = minhiringwbs + " to " + maxhiringwbs + " WBs needed to cover hiring."
+                    str = minhiringwbs + " to " + maxhiringwbs + " WBs equivalents and " 
+                        + ttstr + " <br> needed to cover hiring "
+                        + Math.ceil(minw * Data.churn) + " to " + Math.ceil(maxw * Data.churn) + " WBs.";
                 }
             }
             
