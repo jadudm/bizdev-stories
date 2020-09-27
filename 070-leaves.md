@@ -53,6 +53,8 @@ How much work (and therefore how many WBs) do we need to clear minimum overheads
     </div>
 </div>
 
+In order to have a workforce, we need to [hire](080-hiring.html).
+
 <hr>
 
 To model the impact of leave, we calculated as follows:

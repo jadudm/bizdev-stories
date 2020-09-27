@@ -22,8 +22,8 @@ function calcLeaveWBs(v) {
     return Math.ceil(((wb * 96) / 1600) * 0.85);
 }
 
-function callback070(val) {
-    callback060(val);
+function callback070(val, render = true) {
+    callback060(val, false);
 
     // Add in the cost of WBs.
     nw = numWorkers(getSliderValues());
@@ -51,27 +51,22 @@ function callback070(val) {
     ohh = ohhigh.data[ohhigh.data.length - 1];
     // console.log(inc, ohl, ohh);
 
+    if (render) {
+        sc.chart.update();
+        wsc.chart.update();   
 
-    if (document.getElementById("message")) {
-        var str = defaultMessage;
-        if (minleavewbs != 0) {
-            if (minleavewbs == maxleavewbs) {
-                str = minleavewbs + " WB" + plural(minleavewbs) + " needed to cover leave";
-            } else {
-                str = minleavewbs + " to " + maxleavewbs + " WBs needed to cover leave."
+        if (document.getElementById("message")) {
+            var str = defaultMessage;
+            if (minleavewbs != 0) {
+                if (minleavewbs == maxleavewbs) {
+                    str = minleavewbs + " WB" + plural(minleavewbs) + " needed to cover leave";
+                } else {
+                    str = minleavewbs + " to " + maxleavewbs + " WBs needed to cover leave."
+                }
             }
-        }
+        document.getElementById("message").innerHTML = str;    
+    }
 
-        // if ((inc < ohl)) {
-        // } else if ((inc > ohl) && (inc < ohh)) {
-        //     str = 
-        //     str += "<br>" + minwrang + " wranglers and " + maxleavewbs + " leave WBs.";
-        // } else if ((inc > ohh)) {
-        //     str = "Overheads cleared with " + bds.value() + " BD" + plural(bds.value()) + " and " + maxw  + " WBs.";
-        //     str += "<br>" + maxwrang + " wranglers and " + maxleavewbs + " leave WBs.";
-        // }
-        
-        document.getElementById("message").innerHTML = str;
     }}
 
 bds.callback(function (val) {

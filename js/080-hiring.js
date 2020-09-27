@@ -30,8 +30,8 @@ function calcHiringTT(v) {
     return Math.ceil(replacetime / 1600);
 }
 
-function callback080(val) {
-    callback070(val);
+function callback080(val, render = true) {
+    callback070(val, false);
 
     // Add in the cost of WBs.
     nw = numWorkers(getSliderValues());
@@ -62,21 +62,25 @@ function callback080(val) {
     inc = income.data[income.data.length - 1];
     ohl = ohlow.data[ohlow.data.length - 1];
     ohh = ohhigh.data[ohhigh.data.length - 1];
-    // console.log(inc, ohl, ohh);
 
+    if (render) {
+        sc.chart.update();
+        wsc.chart.update();   
 
-    if (document.getElementById("message")) {
-        var str = defaultMessage;
-        if (minhiringwbs != 0) {
-            if (minhiringwbs == maxhiringwbs) {
-                str = minhiringwbs + " WB" + plural(minhiringwbs) + " needed to cover hiring";
-            } else {
-                str = minhiringwbs + " to " + maxhiringwbs + " WBs needed to cover hiring."
+        if (document.getElementById("message")) {
+            var str = defaultMessage;
+            if (minhiringwbs != 0) {
+                if (minhiringwbs == maxhiringwbs) {
+                    str = minhiringwbs + " WB" + plural(minhiringwbs) + " needed to cover hiring";
+                } else {
+                    str = minhiringwbs + " to " + maxhiringwbs + " WBs needed to cover hiring."
+                }
             }
-        }
-        
+            
         document.getElementById("message").innerHTML = str;
-    }}
+        }
+    }   
+}
 
 bds.callback(function (val) {
     overheads.data = costOfBizdevs(theFloor)(val);
