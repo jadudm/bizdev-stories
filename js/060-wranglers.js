@@ -8,7 +8,6 @@ if (document.getElementById("message")) {
 function wranglerCallback(val) {
     // Add in the cost of WBs.
     nw = numWorkers(getSliderValues());
-    nw = numWorkers(getSliderValues());
 
     minwbs.data = nw.low.map(v => v * bds.value());
     maxwbs.data = nw.high.map(v => v * bds.value());

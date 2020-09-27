@@ -6,13 +6,18 @@ scripts:
     - "js/040-howmany.js"
     - "js/050-payme.js"
     - "js/060-wranglers.js"
+    - "js/070-leaves.js"
 ---
 
-# Herding Cats
+# Leaves
 
-We work in a complex space. Some people wrangling is warranted.
+In the simplest case, 18F staff accrue 4 hours of leave per pay period (2 weeks). 
 
-This model assumes 5 fixed management roles (Directors of Design, Eng, etc.) and one additional full-time wrangler per 20 WBs. Wranglers are assumed in this model to be pure overhead[^inpractice].
+Reality is more complex than depicted here.
+
+For simplicity, we pretending that the 96h of leave accued by staff every year **must** be covered by someone else. This is added to our overheads as *Leave WBs*, or staff who simply do the work that other people *are not doing* while they are on leave.
+
+How much work (and how many WBs) do we need to clear minimum overheads?
 
 <div class="grid-container">
     <div class="grid-row">
@@ -48,10 +53,18 @@ This model assumes 5 fixed management roles (Directors of Design, Eng, etc.) and
     </div>
 </div>
 
-**Management does not add a significant overhead** to the 18F story.
+<hr>
 
-Leaves, however, [add complexity](070-leaves.html).
+To model the impact of leave, we calculated as follows:
+
+1. 18F WBs bill 12 months. 
+2. This is 12 * 4 = 48 weeks, or 24 pay periods.
+3. 18F WBs each have 24 * 4, or 96 hours of leave/year.
+
+Multiplying 96h by the number of WBs needed to staff our paid work, we discover how much work "goes undone" because of leave. Divding by 10 months[^winter] of time (40w * 40h), or 1600h, we approximate *how many more WBs we need to cover leave*. These get added in, bumping our headcount and, therefore, overheads.
+
+
 
 <hr>
 
-[^inpractice]: If, in practice, we wish to have management roles include some billable time, we can. However, we see that management roles do not "swamp" our staffing numbers. With 2xBDs pulling 4xPAs and 1xEI per month, we need roughly 130 staff members to "do the work," but only 9 managers. **The cost of having dedicated business development and management does not dominate our costing model.**
+[^winter]: Again, WBs get paid year-round, but billable work slows down Dec/Jan.
