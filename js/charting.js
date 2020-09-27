@@ -57,6 +57,14 @@ class SuperChart {
         this.chart.data.datasets.push(d);
     }
 
+    getOptions (k) {
+        return this.chart.options;
+    }
+
+    setOptions(o) {
+        this.chart.options = o;
+    }
+
     callback (dsndx, fun) {
         this.chart.data.datasets[dsndx].function = fun;
 

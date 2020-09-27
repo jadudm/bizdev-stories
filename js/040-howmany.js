@@ -12,6 +12,7 @@ minwbs = new Dataset({
     backgroundcolor: 'rgb(200, 80, 80, 0.5)',
     data: [],
     order: 2,
+    stack: "minwbs",
 });
 maxwbs = new Dataset({
     label: "Max WBs",
@@ -19,6 +20,7 @@ maxwbs = new Dataset({
     backgroundcolor: 'rgb(80, 80, 200, 0.5)',
     data: [],
     order: 2,
+    stack: "maxwbs",
 });
 
 
@@ -30,9 +32,9 @@ params = {
 wsc = new SuperChart("workerchart", params);
 
 
-function newWorkCallback (val) {
+function callback040 (val, render = true) {
     // Call the old callback.
-    workSliderCallback(val);
+    callback030(val, false);
     // First, update the data array for the chart.
     // Then, grab the year-end income from the work.
     //minwbs.data = valueOfWork(getSliderValues()).map(v => v * bds.value() * Data.monthNames.length);
@@ -42,26 +44,28 @@ function newWorkCallback (val) {
     minw = Math.max(...minwbs.data);
     maxw = Math.max(...maxwbs.data);
     
-    if (document.getElementById("workmix")) {
-        if (minw + maxw == 0) {
-            str = "No WBs needed.";
-        } else {
-            str = "Under perfect conditions, between " + minw + " and " + maxw + " WBs needed.";
+    if (render) {
+        if (document.getElementById("workmix")) {
+            if (minw + maxw == 0) {
+                str = "No WBs needed.";
+            } else {
+                str = "" + minw + " to " + maxw + " WBs needed.";
+            }
+            document.getElementById("workmix").innerHTML = str;
         }
-        document.getElementById("workmix").innerHTML = str;
+        
+        sc.chart.update();
+        wsc.chart.update();    
     }
-    
-    sc.chart.update();
-    wsc.chart.update();
 }
 
 bds.callback(function (val) {
     overheads.data = costOfBizdevs(theFloor)(val);
-    newWorkCallback(val);
+    callback040(val);
 });
 
-pas.callback(newWorkCallback);
-eis.callback(newWorkCallback);
-bundles.callback(newWorkCallback);
+pas.callback(callback040);
+eis.callback(callback040);
+bundles.callback(callback040);
 
-sc.chart.update();
+callback040(1);

@@ -25,22 +25,25 @@ params = {
 
 sc = new SuperChart("thechart", params);
 
-function workSliderCallback (val) {
+function callback030 (val, render = true) {
     // First, update the data array for the chart.
     // Then, grab the year-end income from the work.
     income.data = valueOfWork(getSliderValues()).map(v => v * bds.value() * Data.monthNames.length);
     totalIncome = income.data[income.data.length - 1].toFixed(2);
-    sc.chart.update();
-    // Update the story text.
-    if (document.getElementById("outcome")) {
-        let str = ((totalIncome > 12) ? "🌟 " : "")
-            + "" + bds.value() + " BD" 
-            + (((bds.value() == 0) || (bds.value() > 1)) ? "s" : "")
-            + " generate" 
-            + (((bds.value() == 0) || (bds.value() > 1)) ? "" : "s")
-            + " $" +  totalIncome + "M in revenue."
-            + ((totalIncome > 12) ? " 🌟" : "");
-        document.getElementById("outcome").innerHTML = str;
+    
+    if (render) {
+        sc.chart.update();
+        // Update the story text.
+        if (document.getElementById("outcome")) {
+            let str = ((totalIncome > 12) ? "🌟 " : "")
+                + "" + bds.value() + " BD" 
+                + (((bds.value() == 0) || (bds.value() > 1)) ? "s" : "")
+                + " generate" 
+                + (((bds.value() == 0) || (bds.value() > 1)) ? "" : "s")
+                + " $" +  totalIncome + "M in revenue."
+                + ((totalIncome > 12) ? " 🌟" : "");
+            document.getElementById("outcome").innerHTML = str;
+        }    
     }
 }
 
@@ -56,7 +59,7 @@ bds = new SuperHSlider("slider-bizdevs",
         callback: function (val) {
             overheads.data = costOfBizdevs(theFloor)(val);
             // After updating costs, update the value prop.
-            workSliderCallback(val);
+            callback030(val);
         }
     });
 
@@ -70,7 +73,7 @@ pas = new SuperHSlider("slider-pas",
         max: 10,
         step: 1,
         default: 0,
-        callback: workSliderCallback,
+        callback: callback030,
     });
 eis = new SuperHSlider("slider-eis", 
     {   
@@ -81,7 +84,7 @@ eis = new SuperHSlider("slider-eis",
         max: 8,
         step: 1,
         default: 0,
-        callback: workSliderCallback
+        callback: callback030
     });
 bundles = new SuperHSlider("slider-bundles", 
     {   
@@ -92,7 +95,7 @@ bundles = new SuperHSlider("slider-bundles",
         max: 3,
         step: 1,
         default: 0,
-        callback: workSliderCallback
+        callback: callback030
     });
 
 function getSliderValues() {

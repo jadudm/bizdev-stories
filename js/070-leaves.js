@@ -10,16 +10,21 @@ leavewbs = new Dataset({
     bordercolor: 'rgb(244, 208, 63, 0.5)',
     backgroundcolor: 'rgb(244, 208, 63, 0.5)',
     data: [],
+    stack: "coveringwbs",
 });
 
 wsc.addDataset(leavewbs);
 
 function calcLeaveWBs(v) {
+
     wb = v * bds.value();
-    return Math.ceil((wb * 96) / 1600);
+    // Assume 15% of leave is taken during slow period.
+    return Math.ceil(((wb * 96) / 1600) * 0.85);
 }
 
-function leaveCallback(val) {
+function callback070(val) {
+    callback060(val);
+
     // Add in the cost of WBs.
     nw = numWorkers(getSliderValues());
 
@@ -46,7 +51,6 @@ function leaveCallback(val) {
     ohh = ohhigh.data[ohhigh.data.length - 1];
     // console.log(inc, ohl, ohh);
 
-    newWorkCallback(val);
 
     if (document.getElementById("message")) {
         var str = defaultMessage;
@@ -72,11 +76,11 @@ function leaveCallback(val) {
 
 bds.callback(function (val) {
     overheads.data = costOfBizdevs(theFloor)(val);
-    leaveCallback(val);
+    callback070(val);
 });
 
-pas.callback(leaveCallback);
-eis.callback(leaveCallback);
-bundles.callback(leaveCallback);
+pas.callback(callback070);
+eis.callback(callback070);
+bundles.callback(callback070);
 
-leaveCallback(1);
+callback070(1);

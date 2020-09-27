@@ -42,6 +42,13 @@ services.pa = new Service([3,4], [8,10], 0.25);
 services.ei = new Service([4,6], [12, 12], 0.65);
 services.bundle = new Service([4,6], [20, 20], 0.855);
 
+// GS15s1 * 1.2 * 1.65 = 215K
+// 215K / 50w / 40h/week = $108/hr
+// 3peep * 8w * 36h/w = 864h * 108/h = 94K
+// 4peep * 8w * 36h/w = 1152 * 108/h = 135K
+// 4p * 10w * 36h/w * 108/h= 169K
+// 4p * 10 * 32h * 108/h = 150K
+
 // Spreads a value over a year.
 // So, in a 10mo year, 100 becomes
 // [10, 20, 30, 40, ..., 100]
@@ -49,7 +56,9 @@ services.bundle = new Service([4,6], [20, 20], 0.855);
 function valueOverYear (v) {
     arr = [];
     for (i = 0; i < Data.monthNames.length; i++) {
-        arr.push(((i + 1) / Data.monthNames.length) * v);
+        monthValue = ((i + 1) / Data.monthNames.length) * v;
+        monthValue = (Math.round(monthValue * 100)/100.0)
+        arr.push(monthValue);
     }
     return arr;
 }
