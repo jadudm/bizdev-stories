@@ -34,7 +34,8 @@ Data.wranglersFixed = 5;
 Data.wbsPerWB = 20;
 Data.wbsPerTT = Data.wbsPerWB;
 Data.churn = 0.3;
-Data.OHPerHire = 110;
-Data.HoursPerWorkYear = 1600;
+Data.OHPerHire = 99;
+Data.hoursPerWorkYear = 1600;
+Data.leavePerPayPeriod = 4;
 
 data = new Data();

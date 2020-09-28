@@ -97,6 +97,7 @@ function wbsNeeded (bd, w) {
 
 function updateStory(v) {
     subst = {};
+    p = new Peep(.109, 1.2, 1.65);
 
     if (document.getElementsByClassName("fixedoverhead")) {
         subst["fixedoverhead"] = Data.fixedOverhead;
@@ -110,7 +111,11 @@ function updateStory(v) {
         subst["income"] = income.toFixed(2);
         subst["pa.value"] = services.pa.value;
         subst["pa.duration.low"] = services.pa.duration.low;
+        subst["pa.duration.low.double"] = 2*services.pa.duration.low;
+
         subst["pa.duration.high"] = services.pa.duration.high;
+        subst["pa.duration.high.double"] = 2*services.pa.duration.high;
+
         subst["pa.workers.low"] = services.pa.workers.low;
         subst["pa.workers.high"] = services.pa.workers.high;
 
@@ -120,16 +125,51 @@ function updateStory(v) {
 
         subst["wbs.min"] = needed.low;
         subst["wbs.max"] = needed.high;
-        p = new Peep(.109, 1.2, 1.65);
+        subst["wbs.max.leave.hours"] = needed.high * 96;
+        subst["wbs.cover.leave"] = Math.ceil(subst["wbs.max.leave.hours"] / Data.hoursPerWorkYear);
+
+        subst["wbs.total1"] = subst["wbs.max"] + subst["wbs.cover.leave"];
+
+        subst["churn.percent"] = Data.churn * 100;
+        subst["wbsPerTT"] = Data.wbsPerTT;
+        subst["replace.wbs"] = Math.ceil(subst["wbs.total1"] * Data.churn);
+        subst["replace.TTs"] = Math.ceil(subst["replace.wbs"] / Data.wbsPerTT);
+        subst["replace.TTs.overhead"] = p.cost(subst["replace.TTs"]).toFixed(2);
+
+        subst["replace.wbs.hours"] = subst["replace.wbs"] * Data.OHPerHire;
+        subst["replace.wbs.additionalwbs"] = Math.ceil(subst["replace.wbs.hours"] / Data.hoursPerWorkYear);
+        subst["replace.wbs.additional.cost"] = p.cost(subst["replace.wbs.additionalwbs"]).toFixed(2);
+        
+        subst["wbs.total2"] = (
+            subst["wbs.max"] 
+            + subst["wbs.cover.leave"] 
+            + subst["replace.wbs.additionalwbs"]
+        ) 
+
         subst["wb.cost"] = p.cost(1).toFixed(2);
         subst["wb.cost.low"] = p.cost(needed.low).toFixed(2);
-        subst["wb.cost.high"] = p.cost(needed.high).toFixed(2);
+        subst["wb.cost.high"] = p.cost(subst["wbs.total2"]).toFixed(2);
 
         subst["wranglers.fixed"] = Data.wranglersFixed;
         subst["wranglers.per"] = Data.wbsPerWB;
-        totalWranglers = Data.wranglersFixed + Math.ceil(needed.high / Data.wbsPerWB);
+        totalWranglers = Data.wranglersFixed + Math.ceil(subst["wbs.total2"] / Data.wbsPerWB);
         subst["wranglers.total"] = totalWranglers;
         subst["wranglers.cost"] = p.cost(totalWranglers).toFixed(2);
+
+        totalCost = (
+            parseFloat(Data.fixedOverhead) 
+            + parseFloat(p.cost(subst["bds"]))
+            + parseFloat(subst["replace.TTs.overhead"])
+            + parseFloat(subst["wranglers.cost"])
+            + parseFloat(p.cost(subst["wbs.total2"]))
+        );
+        subst["overheads.total"] = totalCost.toFixed(2);
+
+        if (parseFloat(subst["income"]) > parseFloat(subst["overheads.total"])) {
+            subst["willitblend"] = "<span style='color: green;'>It is good.</span>";
+        } else {
+            subst["willitblend"] = "<span style='color: red;'>It is not good.</span>";
+        }
 
         for (k of Object.keys(subst)) {
             console.log(k, subst[k]);

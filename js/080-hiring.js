@@ -27,7 +27,7 @@ function calcHiringTT(v) {
     replacetime = replace * Data.OHPerHire;
     // This needs to be backfilled by a WB.
     // 10 months, 4w/month = 40w. 40 * 40 = 1600h.
-    return Math.ceil(replacetime / Data.HoursPerWorkYear);
+    return Math.ceil(replacetime / Data.hoursPerWorkYear);
 }
 
 function callback080(val, render = true) {
