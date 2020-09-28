@@ -57,7 +57,7 @@ This is the *measurable* impact on the organization.
     </div>
 </div>
 
-
+Let's put the [whole story in one place](090-story.html).
 
 <hr>
 

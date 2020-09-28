@@ -41,7 +41,7 @@ scripts:
 	<li> <a name="coverthework.source"></a> Leave is <i>work not done</i>. In this model, we need to cover the work&nbsp;<sup><a href="#coverthework.note">coverthework</a></sup>. <span class="wbs.max"></span> WBs take <span class="wbs.max.leave.hours"></span>h of leave. This is enough work to <b>require <span class="wbs.cover.leave"></span> WBs to cover the leaves</b>.</li>
 	<li> <a name="churn.source"></a> 18F loses <span class="churn.percent"></span>% of our team every year due to termout and/or departure for other employment&nbsp;<sup><a href="#churn.note">churn</a></sup>. We need to hire to replace these staff. Enter <b>TTs</b>, or <i>Talent Team members</i>.</li>
 	<li> We will model requiring 1 TT (non-billable) for every <span class="wbsPerTT"></span> WBs we need to hire. <b>We need to replace <span class="replace.wbs"></span> WBs</b>, needing <span class="replace.TTs"></span> TTs, adding $<span class="replace.TTs.overhead"></span>M to our overheads.</li>
-	<li> <a name="onboarding.source"></a> Onboarding has a real cost <sup><a href="#onboarding.note">onboarding</a></sup>, and it is work that must be covered (like leaves). Hiring <span class="replace.wbs"></span> will add <span class="replace.wbs.hours"></span> hours of non-billable time, which must be covered. This would require <span class="replace.wbs.additionalwbs"></span> WBs.</li>
+	<li> <a name="onboarding.source"></a> Onboarding has a real cost <sup><a href="#onboarding.note">onboarding</a></sup>, and it is work that must be covered (like leaves). Hiring <span class="replace.wbs"></span> will add <span class="replace.wbs.hours"></span> hours of non-billable time, which must be <b>covered by <span class="replace.wbs.additionalwbs"></span> WBs</b>.</li>
 	<li> This brings our <b>total WB count to <span class="wbs.total2"></span></b>, up from <span class="wbs.total1"></span> due to leaves and hiring.</li>
 	<li> WBs would probably do better with <i>some</i> management.</li>
 	<li> We assume <span class="wranglers.fixed"></span> fixed wranglers for 18F (Director of Design, Director of Eng, etc.). We further assume 1 additional wrangler for every <span class="wranglers.per"></span> WBs. This means we need <span class="wranglers.total"></span> wranglers in total.</li>
@@ -61,6 +61,8 @@ scripts:
     <span class="willitblend"></span>
     </div>
 </div>
+
+Miss something? [Back to the beginning](010-fixed-overhead.html);
 
 <hr>
 
