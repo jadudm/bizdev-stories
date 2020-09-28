@@ -8,7 +8,6 @@ scripts:
     - "js/060-wranglers.js"
     - "js/070-leaves.js"
     - "js/080-hiring.js"
-
 ---
 
 # Hiring

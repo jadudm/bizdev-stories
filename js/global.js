@@ -30,7 +30,9 @@ Data.monthNames = [ 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7', 'M8', 'M9', 'M10']
 
 Data.fixedOverhead = 12;
 Data.fixedOverhead10mo = Array(Data.monthNames.length).fill(Data.fixedOverhead);
-Data.wbsPerTT = 20;
+Data.wranglersFixed = 5;
+Data.wbsPerWB = 20;
+Data.wbsPerTT = Data.wbsPerWB;
 Data.churn = 0.3;
 Data.OHPerHire = 110;
 Data.HoursPerWorkYear = 1600;

@@ -23,7 +23,10 @@ params = {
     datasets: [ overheads, income ],
 }
 
-sc = new SuperChart("thechart", params);
+sc = {};
+if (document.getElementById("thechart")) {
+    sc = new SuperChart("thechart", params);
+}
 
 function callback030 (val, render = true) {
     // First, update the data array for the chart.
@@ -106,4 +109,6 @@ function getSliderValues() {
     }
 }
 
-sc.chart.update();
+if (document.getElementById("thechart")) {
+    sc.chart.update();
+}
