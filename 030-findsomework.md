@@ -1,4 +1,5 @@
 ---
+title: Find the Work
 layout: page
 scripts:
     - "js/charting.js"

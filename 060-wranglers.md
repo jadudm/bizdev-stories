@@ -1,4 +1,5 @@
 ---
+title: Herding Cats
 layout: page
 scripts:
     - "js/charting.js"

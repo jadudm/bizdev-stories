@@ -1,4 +1,5 @@
 ---
+title: I Want My Two Dollars
 layout: page
 scripts:
     - "js/charting.js"

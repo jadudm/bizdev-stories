@@ -1,4 +1,5 @@
 ---
+title: How Many BizDevs?
 layout: page
 scripts:
     - "js/charting.js"

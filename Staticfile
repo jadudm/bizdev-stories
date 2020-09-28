@@ -1,0 +1,2 @@
+# Staticfile for the site deploy.
+root: _site

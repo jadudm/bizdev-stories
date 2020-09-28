@@ -1,4 +1,5 @@
 ---
+title: Fixed Overheads
 layout: page
 scripts:
     - "js/global.js"

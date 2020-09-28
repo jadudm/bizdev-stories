@@ -1,4 +1,5 @@
 ---
+Title: Once Upon a Time, Part Two
 layout: page
 scripts:
     - "js/global.js"

@@ -1,4 +1,5 @@
 ---
+title: May I Take Your Leave
 layout: page
 scripts:
     - "js/charting.js"

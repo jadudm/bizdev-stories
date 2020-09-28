@@ -1,4 +1,5 @@
 ---
+title: Rhythm Section Want Ad
 layout: page
 scripts:
     - "js/charting.js"

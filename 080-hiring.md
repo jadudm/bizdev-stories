@@ -1,4 +1,5 @@
 ---
+title: Higher Ring
 layout: page
 scripts:
     - "js/charting.js"
